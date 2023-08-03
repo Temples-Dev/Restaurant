@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "181736781320",
+    "firebase_url": "https://restaurants-b4e11-default-rtdb.firebaseio.com",
+    "project_id": "restaurants-b4e11",
+    "storage_bucket": "restaurants-b4e11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181736781320:android:b7199108bf5420136143bd",
+        "android_client_info": {
+          "package_name": "temples.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181736781320-orr31tm87nk3iehscjhtosv0icuvaav9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE4zpgFzHmZLHquHEyzeh1xBwv7lfQcik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181736781320-orr31tm87nk3iehscjhtosv0icuvaav9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
