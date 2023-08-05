@@ -5,27 +5,24 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import temples.dev.restaurants.domain.Restaurant
 import temples.dev.RestaurantsApplication
 import temples.dev.restaurants.data.local.LocalRestaurant
 import temples.dev.restaurants.data.local.PartialLocalRestaurant
+import temples.dev.restaurants.data.local.RestaurantsDao
 import temples.dev.restaurants.data.local.RestaurantsDb
 import temples.dev.restaurants.data.remote.RestaurantsApiService
+import temples.dev.restaurants.domain.RestaurantEntity
 import java.net.ConnectException
 import java.net.UnknownHostException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RestaurantsRepository {
+@Singleton
+class RestaurantsRepository @Inject constructor(
+    private val restInterface: RestaurantsApiService,
+    private val restaurantsDao: RestaurantsDao
+) {
 
-    private var restInterface: RestaurantsApiService = Retrofit
-        .Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl("https://restaurants-b4e11-default-rtdb.firebaseio.com/")
-        .build()
-        .create(RestaurantsApiService::class.java)
-
-
-    private var restaurantsDao = RestaurantsDb
-        .getDaoInstance(RestaurantsApplication.getAppContext())
 
     suspend fun toggleFavoriteRestaurant(id: Int, value: Boolean) =
         withContext(Dispatchers.IO) {
@@ -77,10 +74,10 @@ class RestaurantsRepository {
         )
     }
 
-    suspend fun getRestaurants(): List<Restaurant> {
+    suspend fun getRestaurants(): List<RestaurantEntity> {
         return withContext(Dispatchers.IO) {
             return@withContext restaurantsDao.getAll().map {
-                Restaurant(it.id, it.title, it.description, it.isFavorite)
+                RestaurantEntity(it.id, it.title, it.description, it.isFavorite)
             }
         }
     }

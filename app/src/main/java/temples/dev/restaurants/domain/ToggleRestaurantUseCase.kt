@@ -1,14 +1,17 @@
 package temples.dev.restaurants.domain
 
 import temples.dev.restaurants.data.RestaurantsRepository
+import javax.inject.Inject
 
-class ToggleRestaurantUseCase {
-    private val repository: RestaurantsRepository = RestaurantsRepository()
-    private val getSortedRestaurantsUseCase = GetSortedRestaurantsUseCase()
+class ToggleRestaurantUseCase @Inject constructor(
+    private val repository: RestaurantsRepository,
+    private val getSortedRestaurantsUseCase: GetSortedRestaurantsUseCase
+) {
+
 
     suspend operator fun invoke(
         id: Int, oldValue: Boolean
-    ): List<Restaurant> {
+    ): List<RestaurantEntity> {
         val newFav = oldValue.not()
         repository.toggleFavoriteRestaurant(id, newFav)
         return getSortedRestaurantsUseCase()

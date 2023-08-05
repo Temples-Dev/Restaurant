@@ -27,7 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import temples.dev.restaurants.domain.Restaurant
+import temples.dev.restaurants.domain.RestaurantEntity
 import temples.dev.ui.theme.RestaurantTheme
 
 
@@ -64,7 +64,7 @@ fun RestaurantsScreen(
 
 @Composable
 fun RestaurantItem(
-    item: Restaurant,
+    item: RestaurantEntity,
     onFavoriteClick: (id: Int, oldValue: Boolean) -> Unit,
     onItemClick: (id: Int) -> Unit
 ) {

@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -13,11 +14,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
+import dagger.hilt.android.AndroidEntryPoint
 import temples.dev.restaurants.presentation.details.RestaurantDetailsScreen
 import temples.dev.restaurants.presentation.list.RestaurantsScreen
 import temples.dev.restaurants.presentation.list.RestaurantsViewModel
 import temples.dev.ui.theme.RestaurantTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +38,7 @@ private fun RestaurantsApp() {
     NavHost(navController = navController, startDestination = "restaurants") {
         composable(route = "restaurants") {
 
-            val viewModel: RestaurantsViewModel = viewModel()
+            val viewModel: RestaurantsViewModel = hiltViewModel()
 
             RestaurantsScreen(
                 state = viewModel.state.value,

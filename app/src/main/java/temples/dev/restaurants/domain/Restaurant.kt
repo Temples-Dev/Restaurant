@@ -4,16 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//import androidx.room.PrimaryKey
+// domain model component - remove all third party dependency
 
 
-@Entity
-data class Restaurant(
-    @PrimaryKey
-    @ColumnInfo(name = "r_id")
+data class RestaurantEntity(  // Restaurant Entity
     val id: Int,
     val title: String,
     val description: String,
-    @ColumnInfo(name = "is_favorite")
     val isFavorite: Boolean = false
 )

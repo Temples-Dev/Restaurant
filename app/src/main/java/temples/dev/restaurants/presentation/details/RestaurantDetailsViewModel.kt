@@ -10,11 +10,11 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import temples.dev.restaurants.data.remote.RestaurantsApiService
-import temples.dev.restaurants.domain.Restaurant
+import temples.dev.restaurants.domain.RestaurantEntity
 
 class RestaurantDetailsViewModel(stateHandle:SavedStateHandle): ViewModel() {
     private var restInterface: RestaurantsApiService
-   val state = mutableStateOf<Restaurant?>(null)
+   val state = mutableStateOf<RestaurantEntity?>(null)
 
     init {
         val retrofit: Retrofit = Retrofit
@@ -32,11 +32,11 @@ class RestaurantDetailsViewModel(stateHandle:SavedStateHandle): ViewModel() {
 
     }
 
-    private suspend fun getRemoteRestaurant(id: Int): Restaurant {
+    private suspend fun getRemoteRestaurant(id: Int): RestaurantEntity {
         return withContext(Dispatchers.IO) {
             val responseMap = restInterface.getRestaurant(id)
             return@withContext responseMap.values.first().let {
-                Restaurant(
+                RestaurantEntity(
                     id = it.id,
                     title = it.title,
                     description = it.description

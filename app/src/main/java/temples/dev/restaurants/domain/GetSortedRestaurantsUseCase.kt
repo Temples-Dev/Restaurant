@@ -1,13 +1,14 @@
 package temples.dev.restaurants.domain
 
 import temples.dev.restaurants.data.RestaurantsRepository
+import javax.inject.Inject
 
-class GetSortedRestaurantsUseCase {
+class GetSortedRestaurantsUseCase @Inject constructor(
+    private val repository: RestaurantsRepository
+) {
 
-    private val repository: RestaurantsRepository =
-        RestaurantsRepository()
 
-    suspend operator fun invoke(): List<Restaurant> {
+    suspend operator fun invoke(): List<RestaurantEntity> {
         return repository.getRestaurants()
             .sortedBy { it.title }
     }
